@@ -12,3 +12,4 @@ C:\Users\ВЕРОНИКА\MyDemoProject\obj\Debug\net9.0\refint\MyDemoProject.dl
 C:\Users\ВЕРОНИКА\MyDemoProject\obj\Debug\net9.0\MyDemoProject.pdb
 C:\Users\ВЕРОНИКА\MyDemoProject\obj\Debug\net9.0\MyDemoProject.genruntimeconfig.cache
 C:\Users\ВЕРОНИКА\MyDemoProject\obj\Debug\net9.0\ref\MyDemoProject.dll
+C:\Users\ВЕРОНИКА\MyDemoProject\obj\Debug\net9.0\MyDemoProject.sourcelink.json
