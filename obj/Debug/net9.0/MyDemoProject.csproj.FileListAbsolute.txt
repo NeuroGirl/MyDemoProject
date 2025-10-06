@@ -1,0 +1,14 @@
+C:\Users\ВЕРОНИКА\MyDemoProject\bin\Debug\net9.0\MyDemoProject.exe
+C:\Users\ВЕРОНИКА\MyDemoProject\bin\Debug\net9.0\MyDemoProject.deps.json
+C:\Users\ВЕРОНИКА\MyDemoProject\bin\Debug\net9.0\MyDemoProject.runtimeconfig.json
+C:\Users\ВЕРОНИКА\MyDemoProject\bin\Debug\net9.0\MyDemoProject.dll
+C:\Users\ВЕРОНИКА\MyDemoProject\bin\Debug\net9.0\MyDemoProject.pdb
+C:\Users\ВЕРОНИКА\MyDemoProject\obj\Debug\net9.0\MyDemoProject.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\ВЕРОНИКА\MyDemoProject\obj\Debug\net9.0\MyDemoProject.AssemblyInfoInputs.cache
+C:\Users\ВЕРОНИКА\MyDemoProject\obj\Debug\net9.0\MyDemoProject.AssemblyInfo.cs
+C:\Users\ВЕРОНИКА\MyDemoProject\obj\Debug\net9.0\MyDemoProject.csproj.CoreCompileInputs.cache
+C:\Users\ВЕРОНИКА\MyDemoProject\obj\Debug\net9.0\MyDemoProject.dll
+C:\Users\ВЕРОНИКА\MyDemoProject\obj\Debug\net9.0\refint\MyDemoProject.dll
+C:\Users\ВЕРОНИКА\MyDemoProject\obj\Debug\net9.0\MyDemoProject.pdb
+C:\Users\ВЕРОНИКА\MyDemoProject\obj\Debug\net9.0\MyDemoProject.genruntimeconfig.cache
+C:\Users\ВЕРОНИКА\MyDemoProject\obj\Debug\net9.0\ref\MyDemoProject.dll
