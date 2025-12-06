@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\ВЕРОНИКА\\MyDemoProject\\MyDemoProject.csproj": {}
+    "C:\\Users\\ВЕРОНИКА\\Lab1\\MyDemoProject.csproj": {}
   },
   "projects": {
-    "C:\\Users\\ВЕРОНИКА\\MyDemoProject\\MyDemoProject.csproj": {
+    "C:\\Users\\ВЕРОНИКА\\Lab1\\MyDemoProject.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\ВЕРОНИКА\\MyDemoProject\\MyDemoProject.csproj",
+        "projectUniqueName": "C:\\Users\\ВЕРОНИКА\\Lab1\\MyDemoProject.csproj",
         "projectName": "MyDemoProject",
-        "projectPath": "C:\\Users\\ВЕРОНИКА\\MyDemoProject\\MyDemoProject.csproj",
+        "projectPath": "C:\\Users\\ВЕРОНИКА\\Lab1\\MyDemoProject.csproj",
         "packagesPath": "C:\\Users\\ВЕРОНИКА\\.dotnet\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\ВЕРОНИКА\\MyDemoProject\\obj\\",
+        "outputPath": "C:\\Users\\ВЕРОНИКА\\Lab1\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -47,6 +47,12 @@
       "frameworks": {
         "net9.0": {
           "targetAlias": "net9.0",
+          "dependencies": {
+            "xunit": {
+              "target": "Package",
+              "version": "[2.9.3, )"
+            }
+          },
           "imports": [
             "net461",
             "net462",
