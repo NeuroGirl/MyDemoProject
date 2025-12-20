@@ -24,7 +24,7 @@ namespace University.Infrastructure
             return _courses.TryGetValue(courseId, out var course) ? course : null;
         }
 
-        public IEnumerable<Course> GetAll()
+        public List<Course> GetAll()
         {
             return _courses.Values.ToList();
         }

@@ -7,7 +7,7 @@ namespace University.Application
         void Add(Course course);
         void Remove(int courseId);
         Course? GetById(int courseId);
-        IEnumerable<Course> GetAll();
+        List<Course> GetAll();
         IEnumerable<Course> GetCoursesByTeacherId(int teacherId);
     }
 
@@ -83,11 +83,11 @@ namespace University.Application
 
             if (course == null)
             {
-                throw new KeyNotFoundException($"Course with ID {courseId} not found.");
+                throw new KeyNotFoundException($"Курс с ID {courseId} не найден.");
             }
             if (teacher == null)
             {
-                throw new KeyNotFoundException($"Teacher with ID {teacherId} not found.");
+                throw new KeyNotFoundException($"Преподаватель с ID {teacherId} не найден.");
             }
 
             if (course.AssignedTeacher != null && course.AssignedTeacher.Id != teacherId)
@@ -105,7 +105,7 @@ namespace University.Application
             var course = _courseRepository.GetById(courseId);
             if (course == null)
             {
-                throw new KeyNotFoundException($"Course with ID {courseId} not found.");
+                throw new KeyNotFoundException($"Курс с ID {courseId} не найден.");
             }
 
             if (course.AssignedTeacher != null)
@@ -123,11 +123,11 @@ namespace University.Application
 
             if (course == null)
             {
-                throw new KeyNotFoundException($"Course with ID {courseId} not found.");
+                throw new KeyNotFoundException($"Курс с ID {courseId} не найден.");
             }
             if (student == null)
             {
-                throw new KeyNotFoundException($"Student with ID {studentId} not found.");
+                throw new KeyNotFoundException($"Студент с ID {studentId} не найден.");
             }
 
             course.AddStudent(student);
@@ -140,11 +140,11 @@ namespace University.Application
 
             if (course == null)
             {
-                throw new KeyNotFoundException($"Course with ID {courseId} not found.");
+                throw new KeyNotFoundException($"Курс с ID {courseId} не найден.");
             }
             if (student == null)
             {
-                throw new KeyNotFoundException($"Student with ID {studentId} not found.");
+                throw new KeyNotFoundException($"Студент с ID {studentId} не найден.");
             }
 
             course.RemoveStudent(student);
@@ -154,7 +154,7 @@ namespace University.Application
         {
             if (_teacherRepository.GetById(teacherId) == null)
             {
-                throw new KeyNotFoundException($"Teacher with ID {teacherId} not found.");
+                throw new KeyNotFoundException($"Преподаватель с ID {teacherId} не найден.");
             }
             return _courseRepository.GetCoursesByTeacherId(teacherId);
         }

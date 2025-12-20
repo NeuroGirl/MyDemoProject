@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "tcuBA6Wn3bE=",
+  "dgSpecHash": "ZtD++9A4BY4=",
   "success": true,
-  "projectFilePath": "C:\\Users\\ВЕРОНИКА\\Lab1\\MyDemoProject.csproj",
+  "projectFilePath": "C:\\Users\\ВЕРОНИКА\\Lab2\\MyDemoProject.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\ВЕРОНИКА\\.dotnet\\.nuget\\packages\\xunit\\2.9.3\\xunit.2.9.3.nupkg.sha512",
     "C:\\Users\\ВЕРОНИКА\\.dotnet\\.nuget\\packages\\xunit.abstractions\\2.0.3\\xunit.abstractions.2.0.3.nupkg.sha512",
