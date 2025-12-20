@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\ВЕРОНИКА\\Lab1\\Lab1.Tests\\Lab1.Tests.csproj": {}
+    "C:\\Users\\ВЕРОНИКА\\Lab2\\Lab1.Tests\\Lab1.Tests.csproj": {}
   },
   "projects": {
-    "C:\\Users\\ВЕРОНИКА\\Lab1\\Lab1.Tests\\Lab1.Tests.csproj": {
+    "C:\\Users\\ВЕРОНИКА\\Lab2\\Lab1.Tests\\Lab1.Tests.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\ВЕРОНИКА\\Lab1\\Lab1.Tests\\Lab1.Tests.csproj",
+        "projectUniqueName": "C:\\Users\\ВЕРОНИКА\\Lab2\\Lab1.Tests\\Lab1.Tests.csproj",
         "projectName": "Lab1.Tests",
-        "projectPath": "C:\\Users\\ВЕРОНИКА\\Lab1\\Lab1.Tests\\Lab1.Tests.csproj",
+        "projectPath": "C:\\Users\\ВЕРОНИКА\\Lab2\\Lab1.Tests\\Lab1.Tests.csproj",
         "packagesPath": "C:\\Users\\ВЕРОНИКА\\.dotnet\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\ВЕРОНИКА\\Lab1\\Lab1.Tests\\obj\\",
+        "outputPath": "C:\\Users\\ВЕРОНИКА\\Lab2\\Lab1.Tests\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -30,8 +30,8 @@
           "net9.0": {
             "targetAlias": "net9.0",
             "projectReferences": {
-              "C:\\Users\\ВЕРОНИКА\\Lab1\\MyDemoProject.csproj": {
-                "projectPath": "C:\\Users\\ВЕРОНИКА\\Lab1\\MyDemoProject.csproj"
+              "C:\\Users\\ВЕРОНИКА\\Lab2\\MyDemoProject.csproj": {
+                "projectPath": "C:\\Users\\ВЕРОНИКА\\Lab2\\MyDemoProject.csproj"
               }
             }
           }
@@ -89,14 +89,14 @@
         }
       }
     },
-    "C:\\Users\\ВЕРОНИКА\\Lab1\\MyDemoProject.csproj": {
+    "C:\\Users\\ВЕРОНИКА\\Lab2\\MyDemoProject.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\ВЕРОНИКА\\Lab1\\MyDemoProject.csproj",
+        "projectUniqueName": "C:\\Users\\ВЕРОНИКА\\Lab2\\MyDemoProject.csproj",
         "projectName": "MyDemoProject",
-        "projectPath": "C:\\Users\\ВЕРОНИКА\\Lab1\\MyDemoProject.csproj",
+        "projectPath": "C:\\Users\\ВЕРОНИКА\\Lab2\\MyDemoProject.csproj",
         "packagesPath": "C:\\Users\\ВЕРОНИКА\\.dotnet\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\ВЕРОНИКА\\Lab1\\obj\\",
+        "outputPath": "C:\\Users\\ВЕРОНИКА\\Lab2\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

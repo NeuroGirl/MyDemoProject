@@ -29,7 +29,7 @@ namespace University.Infrastructure
             return _courses.Values.ToList();
         }
 
-        public IEnumerable<Course> GetCoursesByTeacherId(int teacherId)
+        public List<Course> GetCoursesByTeacherId(int teacherId)
         {
             return _courses.Values.Where(c => c.AssignedTeacher?.Id == teacherId).ToList();
         }
@@ -56,7 +56,7 @@ namespace University.Infrastructure
             return _teachers.TryGetValue(teacherId, out var teacher) ? teacher : null;
         }
 
-        public IEnumerable<Teacher> GetAll()
+        public List<Teacher> GetAll()
         {
             return _teachers.Values.ToList();
         }
@@ -83,7 +83,7 @@ namespace University.Infrastructure
             return _students.TryGetValue(studentId, out var student) ? student : null;
         }
 
-        public IEnumerable<Student> GetAll()
+        public List<Student> GetAll()
         {
             return _students.Values.ToList();
         }

@@ -8,7 +8,7 @@ namespace University.Application
         void Remove(int courseId);
         Course? GetById(int courseId);
         List<Course> GetAll();
-        IEnumerable<Course> GetCoursesByTeacherId(int teacherId);
+        List<Course> GetCoursesByTeacherId(int teacherId);
     }
 
     public interface ITeacherRepository
@@ -16,7 +16,7 @@ namespace University.Application
         void Add(Teacher teacher);
         void Remove(int teacherId);
         Teacher? GetById(int teacherId);
-        IEnumerable<Teacher> GetAll();
+        List<Teacher> GetAll();
     }
 
     public interface IStudentRepository
@@ -24,7 +24,7 @@ namespace University.Application
         void Add(Student student);
         void Remove(int studentId);
         Student? GetById(int studentId);
-        IEnumerable<Student> GetAll();
+        List<Student> GetAll();
     }
 
     public class CourseService
@@ -71,7 +71,7 @@ namespace University.Application
             return _courseRepository.GetById(courseId);
         }
 
-        public IEnumerable<Course> GetAllCourses()
+        public List<Course> GetAllCourses()
         {
             return _courseRepository.GetAll();
         }
@@ -150,7 +150,7 @@ namespace University.Application
             course.RemoveStudent(student);
         }
 
-        public IEnumerable<Course> GetCoursesByTeacher(int teacherId)
+        public List<Course> GetCoursesByTeacher(int teacherId)
         {
             if (_teacherRepository.GetById(teacherId) == null)
             {
@@ -159,14 +159,14 @@ namespace University.Application
             return _courseRepository.GetCoursesByTeacherId(teacherId);
         }
 
-        public IEnumerable<Student> GetStudentsByCourse(int courseId)
+        public List<Student> GetStudentsByCourse(int courseId)
         {
             var course = _courseRepository.GetById(courseId);
             if (course == null)
             {
                 throw new KeyNotFoundException($"Курс с ID {courseId} не найден.");
             }
-            return course.Students;
+            return (List<Student>)course.Students;
         }
 
         public void AddTeacher(Teacher teacher)
@@ -196,12 +196,12 @@ namespace University.Application
         {
             return _studentRepository.GetById(studentId);
         }
-        public IEnumerable<Teacher> GetAllTeachers()
+        public List<Teacher> GetAllTeachers()
         {
             return _teacherRepository.GetAll();
         }
 
-        public IEnumerable<Student> GetAllStudents()
+        public List<Student> GetAllStudents()
         {
             return _studentRepository.GetAll();
         }

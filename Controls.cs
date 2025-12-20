@@ -387,14 +387,14 @@ namespace ConsoleСontroller
         }
     }
 
-    internal static IEnumerable<Teacher> GetAllTeachers()
+    internal static List<Teacher> GetAllTeachers()
     {
-        return _courseService.GetAllCourses().SelectMany(c => Enumerable.Empty<Teacher>()).Concat(_courseService.GetAllCourses().Where(c => c.AssignedTeacher != null).Select(c => c.AssignedTeacher!)).DistinctBy(t => t.Id).Concat(_courseService.GetAllTeachers());
+        return (List<Teacher>)_courseService.GetAllCourses().SelectMany(c => Enumerable.Empty<Teacher>()).Concat(_courseService.GetAllCourses().Where(c => c.AssignedTeacher != null).Select(c => c.AssignedTeacher!)).DistinctBy(t => t.Id).Concat(_courseService.GetAllTeachers());
     }
 
-    internal static IEnumerable<Student> GetAllStudents()
+    internal static List<Student> GetAllStudents()
     {
-        return _courseService.GetAllCourses().SelectMany(c => c.Students).Concat(_courseService.GetAllStudents()).DistinctBy(s => s.Id);
+        return (List<Student>)_courseService.GetAllCourses().SelectMany(c => c.Students).Concat(_courseService.GetAllStudents()).DistinctBy(s => s.Id);
     }
     }
 }
