@@ -2,7 +2,7 @@ namespace DeliverySystem.AddProperties
 {
 public abstract class OrderDecorator : Order.Order
 {
-    protected Order.Order _wrappedOrder;
+    private Order.Order _wrappedOrder;
 
     public OrderDecorator(Order.Order wrappedOrder) : base(wrappedOrder.OrderId)
     {
