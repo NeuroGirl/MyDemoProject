@@ -9,11 +9,11 @@ public class Courier : IOrderObserver
     {
         if (order.Status == Order.OrderStatus.InTransit)
         {
-            Console.WriteLine($"[Courier {_name}]: Заказ #{order.OrderId} готов к забору (Статус: {order.Status}). Приступаю к доставке!");
+            Console.WriteLine($"[Курьер {_name}]: Заказ #{order.OrderId} готов к забору (Статус: {order.Status}). Приступаю к доставке!");
         }
         else if (order.Status == Order.OrderStatus.Delivered)
         {
-            Console.WriteLine($"[Courier {_name}]: Заказ #{order.OrderId} доставлен. Завершаю смену.");
+            Console.WriteLine($"[Курьер {_name}]: Заказ #{order.OrderId} доставлен. Завершаю смену.");
         }
     }
 }
