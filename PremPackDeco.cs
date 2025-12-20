@@ -2,7 +2,7 @@ namespace DeliverySystem.AddProperties
 {
 public class PremiumPackagingDecorator : OrderDecorator
 {
-    private const decimal PackagingCost = 75.00m;
+    private const decimal PackagingCost = 75.25m;
     
     public PremiumPackagingDecorator(Order.Order wrappedOrder) : base(wrappedOrder)
     {
