@@ -1,96 +1,138 @@
-﻿using University.Application;
-using University.Infrastructure;
-using ConsoleСontroller;
+﻿namespace DeliverySystem.DeliveryService
+{
+public class DeliveryService
+{
+    private static int _nextOrderId = 1000;
+    private Order.OrderFactory _factory;
+    private CostCals.PriceCalculator _priceCalculator;
+    private MenuManager.MenuManager _menuManager = MenuManager.MenuManager.Instance;
+
+    public DeliveryService(Order.OrderFactory factory, CostCals.IPriceCalculationStrategy initialStrategy)
+    {
+        _factory = factory;
+        _priceCalculator = new CostCals.PriceCalculator(initialStrategy);
+    }
+
+    public Order.Order CreateAndConfigureOrder(string type, int[] dishIds)
+    {
+        Order.Order order = type.ToLower() switch
+        {
+            "vip" => new Order.VIPOrderFactory().CreateOrder(++_nextOrderId),
+            _ => new Order.StandardOrderFactory().CreateOrder(++_nextOrderId),
+        };
+
+        foreach (var id in dishIds)
+        {
+            var menuItem = _menuManager.GetItem(id);
+            if (menuItem != null)
+            {
+                order.Items.Add(new OrderComponent.Dish(menuItem));
+            }
+        }
+        
+        order.CalculateBaseTotal();
+        return order;
+    }
+
+    public Order.Order ApplyDecoratorsAndFinalizePrice(Order.Order baseOrder, bool usePremiumPackaging, bool useExpressDelivery)
+    {
+        Order.Order finalOrder = baseOrder;
+
+        if (usePremiumPackaging)
+        {
+            finalOrder = new AddProperties.PremiumPackagingDecorator(finalOrder);
+        }
+
+        if (useExpressDelivery)
+        {
+            _priceCalculator.SetStrategy(new CostCals.ExpressPricingStrategy());
+        }
+        else
+        {
+            _priceCalculator.SetStrategy(new CostCals.StandardPricingStrategy());
+        }
+
+        finalOrder.CalculateBaseTotal(); 
+        
+        string summary;
+        decimal execCost = _priceCalculator.ExecuteCalculation(
+        finalOrder.BaseTotal,
+        finalOrder,
+        out summary
+        );
+
+        finalOrder.SetFinalCost(execCost);
+
+        Console.WriteLine($"\n--- Детализация Стоимости Заказа #{finalOrder.OrderId} ({finalOrder.GetType().Name}) ---");
+        Console.WriteLine(summary);
+        Console.WriteLine($"ИТОГО К ОПЛАТЕ: {finalOrder.FinalCost:C}");
+        Console.WriteLine("---\n");
+        
+        return finalOrder;
+    }
+
+    public void ProcessAndTrackOrder(Order.Order order, StateControl.IOrderObserver observer)
+    {
+        if (order is StateControl.IOrderSubject subject)
+        {
+            subject.Attach(observer);
+        }
+
+        order.ProcessOrder();
+        order.Status = Order.OrderStatus.Preparing;
+        order.Status = Order.OrderStatus.InTransit;
+        order.Status = Order.OrderStatus.Delivered;
+        if (order is StateControl.IOrderSubject subjectToDetach)
+        {
+            subjectToDetach.Detach(observer);
+        }
+    }
+
+    public Order.Order ApplyAndFinalizePrice(Order.Order order, bool applyTax, bool applyDiscount)
+    {
+        if (order == null) throw new ArgumentNullException(nameof(order));
+
+        order.CalculateBaseTotal();
+            decimal finalPrice = _priceCalculator.ExecuteCalculation(
+            order.BaseTotal, 
+            order,            
+            out _);
+        order.SetFinalCost(finalPrice);          
+        return order;
+    }
+}
+
+
 public class Program
 {
-public static void Main(string[] args)
+    public static void Main()
     {
-        CourseService courseService = InitializeSystem();
+        var service = new DeliveryService(new Order.StandardOrderFactory(), new CostCals.StandardPricingStrategy());
+        var menu = MenuManager.MenuManager.Instance;
+        var order1 = service.CreateAndConfigureOrder("standard", new[] { 101, 104 });
+        var combo = new OrderComponent.DishComposite("Ланч-набор");
+        combo.Add(new OrderComponent.Dish(menu.GetItem(103)));
+        combo.Add(new OrderComponent.Dish(menu.GetItem(102)));
+        order1.Items.Add(combo);
 
-        if (courseService == null)
+        Console.WriteLine($"\n--- Начальная конфигурация заказа #{order1.OrderId} ---");
+        foreach(var item in order1.Items)
         {
-            Console.WriteLine("Критическая ошибка инициализации. Программа завершает работу.");
-            return;
+            Console.WriteLine($"- {item.GetDescription()} ({item.GetPrice():C})");
         }
+        Console.WriteLine($"Базовая сумма: {order1.BaseTotal:C}");
+        
+        var finalOrder1 = service.ApplyAndFinalizePrice(order1, false, false);
+        var courierA = new StateControl.Courier("Алексей");
+        service.ProcessAndTrackOrder(finalOrder1, courierA);
+        
+        
+        Console.WriteLine("\n=======================================================\n");
 
-        ConsoleCommands.SetCourseService(courseService);
-        RunConsoleInterface();}
-
-   private static CourseService InitializeSystem()
-    {
-        Console.WriteLine("--- Инициализация системы управления курсами и преподавателями ---");
-
-        var courseRepository = new InMemoryCourseRepository();
-        var teacherRepository = new InMemoryTeacherRepository();
-        var studentRepository = new InMemoryStudentRepository();
-
-        var courseService = new CourseService(courseRepository, teacherRepository, studentRepository);
-
-        Console.WriteLine("--- Система инициализирована ---");
-        return courseService;
+        var vipOrder = service.CreateAndConfigureOrder("vip", new[] { 102 });
+        var finalOrder2 = service.ApplyAndFinalizePrice(vipOrder, true, true);
+        var courierB = new StateControl.Courier("Борис");
+        service.ProcessAndTrackOrder(finalOrder2, courierB);
     }
-
-    private static void RunConsoleInterface()
-        {
-            string command;
-            do
-            {
-                ShowMenu();
-                command = Console.ReadLine()?.Trim().ToLower() ?? "";
-
-                switch (command)
-                {
-                    case "1": ConsoleCommands.AddCourse(); break;
-                    case "2": ConsoleCommands.RemoveCourse(); break;
-                    case "3": ConsoleCommands.AssignTeacherToCourse(); break;
-                    case "4": ConsoleCommands.UnassignTeacherFromCourse(); break;
-                    case "5": ConsoleCommands.AddStudentToCourse(); break;
-                    case "6": ConsoleCommands.RemoveStudentFromCourse(); break;
-                    case "7": ConsoleCommands.GetAllCourses(); break;
-                    case "8": ConsoleCommands.GetCoursesByTeacher(); break;
-                    case "9": ConsoleCommands.GetStudentsByCourse(); break;
-                    case "10": ConsoleCommands.AddTeacher(); break;
-                    case "11": ConsoleCommands.AddStudent(); break;
-                    case "exit":
-                    case "quit":
-                    case "q":
-                        Console.WriteLine("Выход из системы...");
-                        break;
-                    default:
-                        Console.WriteLine("Неизвестная команда. Пожалуйста, выберите из меню.");
-                        break;
-                }
-
-                if (command != "exit" && command != "quit" && command != "q")
-                {
-                    Console.WriteLine("\nНажмите Enter для продолжения...");
-                    Console.ReadLine();
-                    Console.Clear();
-                }
-
-            } while (command != "exit" && command != "quit" && command != "q");
-        }
-
-
-    private static void ShowMenu()
-    {
-        Console.WriteLine("\n===== Меню управления системой =====");
-        Console.WriteLine("--- Курсы ---");
-        Console.WriteLine("1. Добавить новый курс (онлайн/офлайн)");
-        Console.WriteLine("2. Удалить курс");
-        Console.WriteLine("3. Назначить преподавателя на курс");
-        Console.WriteLine("4. Снять преподавателя с курса");
-        Console.WriteLine("5. Добавить студента на курс");
-        Console.WriteLine("6. Удалить студента с курса");
-        Console.WriteLine("7. Показать все курсы");
-        Console.WriteLine("--- Преподаватели и Студенты ---");
-        Console.WriteLine("8. Показать курсы преподавателя");
-        Console.WriteLine("9. Показать студентов курса");
-        Console.WriteLine("10. Добавить преподавателя");
-        Console.WriteLine("11. Добавить студента");
-        Console.WriteLine("---------------------------------");
-        Console.WriteLine("exit/quit/q - Выйти из программы");
-        Console.Write("Введите номер команды: ");
-    }
-
+}
 }

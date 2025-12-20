@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\ВЕРОНИКА\\Lab1\\MyDemoProject.csproj": {}
+    "C:\\Users\\ВЕРОНИКА\\Lab3\\MyDemoProject.csproj": {}
   },
   "projects": {
-    "C:\\Users\\ВЕРОНИКА\\Lab1\\MyDemoProject.csproj": {
+    "C:\\Users\\ВЕРОНИКА\\Lab3\\MyDemoProject.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\ВЕРОНИКА\\Lab1\\MyDemoProject.csproj",
+        "projectUniqueName": "C:\\Users\\ВЕРОНИКА\\Lab3\\MyDemoProject.csproj",
         "projectName": "MyDemoProject",
-        "projectPath": "C:\\Users\\ВЕРОНИКА\\Lab1\\MyDemoProject.csproj",
+        "projectPath": "C:\\Users\\ВЕРОНИКА\\Lab3\\MyDemoProject.csproj",
         "packagesPath": "C:\\Users\\ВЕРОНИКА\\.dotnet\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\ВЕРОНИКА\\Lab1\\obj\\",
+        "outputPath": "C:\\Users\\ВЕРОНИКА\\Lab3\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
