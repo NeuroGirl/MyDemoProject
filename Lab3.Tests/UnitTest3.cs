@@ -29,13 +29,12 @@ public class DeliveryServiceTests
         }
     }
 
-    // Composite тест: проверяем суммирование компонентов
     [Fact]
     public void DishComposite_ShouldCalculateTotalPriceCorrectly()
     {
         var menu = MenuManager.MenuManager.Instance;
-        var burger = new OrderComponent.Dish(menu.GetItem(101)); // 450.00
-        var fries = new OrderComponent.Dish(menu.GetItem(104));  // 150.00
+        var burger = new OrderComponent.Dish(menu.GetItem(101));
+        var fries = new OrderComponent.Dish(menu.GetItem(104)); 
         
         var combo = new OrderComponent.DishComposite("Test Combo");
         combo.Add(burger);
@@ -45,10 +44,9 @@ public class DeliveryServiceTests
         Assert.Contains("Бургер Классический", combo.GetDescription());
     }
 
-    // Strategy & Pricing Тесты
     [Theory]
-    [InlineData(1000.00, false, 1000.00 + 50.00 + 150.00)] // Base + Tax(5%) + Delivery
-    [InlineData(1000.00, true, 1000.00 - 50.00 + 350.00)]  // Base - Discount + Express Fee
+    [InlineData(1000.00, false, 1000.00 + 50.00 + 150.00)] 
+    [InlineData(1000.00, true, 1000.00 - 50.00 + 350.00)]
     public void PriceCalculator_ShouldApplyStrategyCorrectly(decimal baseTotal, bool isExpress, decimal expectedTotal)
     {
         
@@ -66,22 +64,20 @@ public class DeliveryServiceTests
         Assert.Equal(expectedTotal, result);
     }
     
-    // Decorator Тесты
     [Fact]
     public void PremiumDecorator_ShouldIncreaseCost()
     {
         var menu = MenuManager.MenuManager.Instance;
         var standardOrder = new Order.StandardOrder(0);
-        standardOrder.Items.Add(new OrderComponent.Dish(menu.GetItem(101))); // 450.00
-        standardOrder.CalculateBaseTotal(); // BaseTotal = 450.00
+        standardOrder.Items.Add(new OrderComponent.Dish(menu.GetItem(101)));
+        standardOrder.CalculateBaseTotal(); 
 
         var decoratedOrder = new AddProperties.PremiumPackagingDecorator(standardOrder);
-        decoratedOrder.CalculateBaseTotal(); // BaseTotal должен быть 450 + 75 = 525.00
+        decoratedOrder.CalculateBaseTotal(); 
         
         Assert.Equal(525.00m, decoratedOrder.BaseTotal);
     }
     
-    // Observer Тест: Проверяем, что уведомление срабатывает при смене статуса
     [Fact]
     public void Order_ShouldNotifyObserversOnStatusChange()
     {
@@ -89,19 +85,16 @@ public class DeliveryServiceTests
         var order = new StateControl.OrderSubject(100);
         order.Attach(mockObserver);
         
-        order.Status = Order.OrderStatus.InTransit; // Триггер
+        order.Status = Order.OrderStatus.InTransit;
         
-        // Проверяем, что метод Update был вызван
         Assert.True(mockObserver.UpdateCalled);
         Assert.Equal(Order.OrderStatus.InTransit, order.Status);
         
-        // Убедимся, что при повторной установке того же статуса уведомление не срабатывает
         mockObserver.Reset();
         order.Status = Order.OrderStatus.InTransit;
         Assert.False(mockObserver.UpdateCalled);
     }
     
-    // Вспомогательный класс для мок-объекта в тесте Observer
     private class MockCourierObserver : StateControl.IOrderObserver
     {
         public bool UpdateCalled { get; private set; }
